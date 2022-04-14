@@ -1,11 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 
 //local imports
-import { Home, Error, Loading, Login } from "./components";
+import { Home, Error, Login } from "./components";
 import Header from "./components/Header";
 
 //end local imports
 function App() {
+  
   return (
     <>
       <Header />
