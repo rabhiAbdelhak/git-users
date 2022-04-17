@@ -1,14 +1,32 @@
-import React from 'react'
+import React , {useState} from 'react'
 import styled from 'styled-components';
 import {FaSearch} from 'react-icons/fa';
 
+//local imports
+import { useGithubContext } from '../context';
+
+
 const Search = () => {
+  const [username, setUsername] = useState();
+  const {fetchUserData} = useGithubContext();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+      console.log('submit');
+
+      if(username) fetchUserData(username);
+  }
+
+  const handleChange = (e) => {
+    setUsername(e.target.value)
+  }
   return (
-    <Wrapper>
+    <section>
+      <Wrapper onSubmit={handleSubmit}>
         <Icon htmlFor='user'><FaSearch/></Icon>
-        <Input type='text' placeholder='Search For A git User' name='user' id='user'/>
+        <Input type='text' placeholder='Search For A git User' name='user' id='user' onChange={handleChange}/>
         <button className='btn'>Search</button>
-    </Wrapper>
+      </Wrapper>
+    </section>
   )
 }
 

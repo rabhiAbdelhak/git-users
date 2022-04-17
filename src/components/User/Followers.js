@@ -5,19 +5,20 @@ import styled from "styled-components";
 import {useGithubContext} from "../../context";
 
 const Followers = () => {
-  const { fellowers } = useGithubContext();
+  const { followers } = useGithubContext();
   return (
     <Wrapper>
       <Title>Followers</Title>
       <Items>
-        {fellowers.map((fellower,index) => {
+        {followers.map((follower,index) => {
+          const {id, avatar_url, login, url} = follower
           return ( 
-            <Fllower key={fellower.id}>
-              <img src={fellower.avatar_url} alt="avatar" />
+            <Fllower key={id}>
+              <img src={avatar_url} alt="avatar" />
               <Info>
-                <Name>{fellower.login}</Name>
+                <Name>{login}</Name>
                 <ProfileLink href="/">
-                 {fellower.url}
+                 {url}
                 </ProfileLink>
               </Info>
             </Fllower>
@@ -83,4 +84,9 @@ const Name = styled.h4`
 const ProfileLink = styled.a`
   font-size: 13px;
   color: var(--clr-grey-4);
+  transition: var(--transition);
+
+  :hover {
+    color: var(--clr-grey-9);
+  }
 `;

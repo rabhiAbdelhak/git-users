@@ -7,7 +7,7 @@ import { FaUsers, FaUserShield } from "react-icons/fa";
 import { useGithubContext } from "../context";
 
 const Numbers = () => {
-  const { repos, fellowers, user } = useGithubContext();
+  const {user} = useGithubContext();
   const items = [
     {
       id: 1,
@@ -40,14 +40,15 @@ const Numbers = () => {
   ];
   return (
     <Wrapper>
-      {items.map((item) => {
+      {items.map((item,index) => {
+        const {icon, color, value, name} = item
         return (
-          <Number>
-            <Icon className = {item.color}>
-              {item.icon}
+          <Number key={index}>
+            <Icon className = {color}>
+              {icon}
             </Icon>
-            <Value>{item.value}</Value>
-            <Name>{item.name}</Name>
+            <Value>{value}</Value>
+            <Name>{name}</Name>
           </Number>
         );
       })}
@@ -58,10 +59,8 @@ const Numbers = () => {
 export default Numbers;
 
 const Wrapper = styled.section`
-  margin: 40px 0;
-  min-height: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
 `;
 
