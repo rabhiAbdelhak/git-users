@@ -3,17 +3,16 @@ import styled from 'styled-components';
 import {FaSearch} from 'react-icons/fa';
 
 //local imports
-import { useGithubContext } from '../context';
+import { useGithubContext } from '../../context';
 
 
 const Search = () => {
   const [username, setUsername] = useState();
-  const {fetchUserData} = useGithubContext();
+  const {fetchUserData, requests,loading, error} = useGithubContext();
   const handleSubmit = (e) => {
     e.preventDefault();
-      console.log('submit');
-
       if(username) fetchUserData(username);
+      e.target.reset();
   }
 
   const handleChange = (e) => {
@@ -21,17 +20,27 @@ const Search = () => {
   }
   return (
     <section>
+      
       <Wrapper onSubmit={handleSubmit}>
         <Icon htmlFor='user'><FaSearch/></Icon>
         <Input type='text' placeholder='Search For A git User' name='user' id='user' onChange={handleChange}/>
-        <button className='btn'>Search</button>
+        <button className='btn' disabled = {!(requests < 60 && !loading)}>Search</button>
+        <h5>Requests : {requests}/60</h5>
       </Wrapper>
+      {error.show && <ErrorWrapper><p>{error.msg}</p></ErrorWrapper>}
     </section>
   )
 }
 
 export default Search;
 
+const ErrorWrapper = styled.div`
+margin: 10px 0;
+p{
+  color: tomato;
+  letter-spacing: 2px;
+}
+`
 const Wrapper = styled.form`
 width: 100%;
 height: 40px;
@@ -45,7 +54,30 @@ button {
     width: 80px;
     font-size: 13px;
     padding: 5px;
-    height: 
+    text-align: center;
+}
+
+button:disabled{
+  opacity:0.3;
+}
+button:hover:disabled{
+  background: whitesmoke;
+}
+
+h5{
+  margin:0 10px;
+  color: var(--clr-grey-5);
+}
+
+@media(max-width:360px){
+  h5{
+    font-size: 9px;
+    margin:0 5px;
+  }
+  button{
+    width:55px;
+    font-size: 8px;
+  }
 }
 `
 const Icon = styled.label`
@@ -70,5 +102,9 @@ border-radius: var(--radius);
 
 ::placeholder {
     opacity: 0.6;
+}
+
+@media(max-width:400px){
+  width: 85px;
 }
 `

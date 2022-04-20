@@ -66,6 +66,10 @@ const Wrapper = styled.article`
   border-radius: var(--radius);
   padding: 30px;
   flex: 1;
+
+  @media(max-width: 450px){
+    height: auto;
+  }
 `;
 
 const Title = styled.span`
@@ -121,6 +125,27 @@ const Info = styled.div`
     color: white;
     cursor: pointer;
   }
+
+  @media (max-width: 450px){
+    flex-direction: column;
+
+    > div {
+      flex-direction : column;
+      align-items: center;
+      flex: 1;
+      text-align: center;
+    }
+    > div img{
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      margin-right:0;
+    }
+    a{
+      font-size: 12px;
+      padding:5px;
+    }
+  }
 `;
 
 const Bio = styled.h4`
@@ -128,6 +153,11 @@ const Bio = styled.h4`
   font-size: 18px;
   color: var(--clr-grey-5);
   font-weight: 500;
+
+@media(max-width: 450px){
+  text-align: center;
+  font-size: 16px;
+}
 `;
 
 const Findhim = styled.div`

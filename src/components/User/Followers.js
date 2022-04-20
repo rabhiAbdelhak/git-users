@@ -10,20 +10,20 @@ const Followers = () => {
     <Wrapper>
       <Title>Followers</Title>
       <Items>
-        {followers.map((follower,index) => {
-          const {id, avatar_url, login, url} = follower
+        {followers.length > 0 ? followers.map((follower,index) => {
+          const {id, avatar_url, login, html_url} = follower
           return ( 
             <Fllower key={id}>
               <img src={avatar_url} alt="avatar" />
               <Info>
                 <Name>{login}</Name>
-                <ProfileLink href="/">
-                 {url}
+                <ProfileLink href={html_url}>
+                 Visit profile
                 </ProfileLink>
               </Info>
             </Fllower>
           );
-        })}
+        }) : <h3 className='no-follower'>There is no followers</h3>}
       </Items>
     </Wrapper>
   );
@@ -54,16 +54,27 @@ const Title = styled.span`
 `;
 
 const Items = styled.div`
-  max-height: 100%;
-  padding: 20px;
+  height: 100%;
+  min-width: 400px;
+  padding: 20px 0 20px 15px;
   overflow: scroll;
+  
+  .no-follower {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--clr-grey-8);
+  }
 
+  @media (max-width:450px){
+    min-width: 240px;
+  }
 `;
 const Fllower = styled.div`
   display: flex;
+  width: 200px;
   align-items: center;
   margin-bottom: 25px;
-  padding: 0 20px;
+  padding: 0 20px 0 0;
 
   img {
     width: 50px;
@@ -79,6 +90,12 @@ const Name = styled.h4`
   font-size: 16px;
   letter-spacing: 2px;
   margin-bottom: 5px;
+
+  @media (max-width: 450px){
+    font-size:12px;
+    width: 200px;
+  }
+
 `;
 
 const ProfileLink = styled.a`
@@ -89,4 +106,10 @@ const ProfileLink = styled.a`
   :hover {
     color: var(--clr-grey-9);
   }
+  
+  @media (max-width: 768px){
+    font-size:10px;
+    width: 200px;
+  }
+
 `;

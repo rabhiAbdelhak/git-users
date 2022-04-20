@@ -1,11 +1,14 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react';
 import styled from 'styled-components';
 
+
 const Login = () => {
+  const {loginWithRedirect} = useAuth0();
   return (
     <Wrapper className = '_flex-center'>
       <img src='assets/images/login-img.png' alt='loginimage' className='_updown-animation'/>
-      <button className='btn'>Login/SignUp</button>
+      <button className='btn' onClick={loginWithRedirect}>Login/SignUp</button>
     </Wrapper>
   )
 }
